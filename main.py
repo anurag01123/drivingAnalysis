@@ -19,12 +19,7 @@ class Cord(BaseModel):
 # class JsonList(BaseModel):
 #     data: List[Cord]
 
-origins = ['https://localhost:3000',
-"http://localhost",
-"http://localhost:5500",
-"http://127.0.0.1:5500",
-"https://johnnash112.github.io"
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
