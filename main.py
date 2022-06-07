@@ -62,7 +62,7 @@ async def post_todo(dataRec:List[Cord]):
         df = pd.concat(newFrame)
     # getting test data
     X_test, y_test = df2Xy(df, sample_col='TripID', sort_by ='time',data_cols=['Latitude','Longitude','speed'] ,steps_in_rows=True)
-    clf = load_learner("/home/dbx/finalApp/backend/trainedModel.pkl")
+    clf = load_learner("trainedModel.pkl")
     probas, target, preds = clf.get_X_preds(X_test)
     if(preds=='[0.0]'):
         return{"Class":"Safe"}
