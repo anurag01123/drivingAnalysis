@@ -41,7 +41,7 @@ async def post_todo(dataRec:List[Cord]):
     print(collected_data)
     df = pd.DataFrame(collected_data, columns =['timestamp', 'latitude', 'longitude', 'speed'])
     df.columns = ["time","Latitude","Longitude","speed"]
-    datalimit = 1630
+    datalimit = 2000
     df["TripID"] = 'T-0'
     df["Latitude"] = pd.to_numeric(df["Latitude"], errors ='ignore')
     df["Longitude"] = pd.to_numeric(df["Longitude"], errors ='ignore')
