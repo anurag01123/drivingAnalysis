@@ -59,6 +59,7 @@ async def post_todo(dataRec:List[Cord]):
     X_test, y_test = df2Xy(df, sample_col='TripID', sort_by ='time',data_cols=['Latitude','Longitude','speed'] ,steps_in_rows=True)
     clf = load_learner("trainedModel.pkl")
     probas, target, preds = clf.get_X_preds(X_test)
+    print(preds)
     if(preds=='[0.0]'):
         df = df.iloc[0:0]
         collected_data = []
