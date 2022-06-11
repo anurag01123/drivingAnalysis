@@ -33,9 +33,10 @@ app.add_middleware(
 def read_root():
     return("hello there!")
 
-collected_data = []    
+    
 @app.post("/getClass")
 async def post_todo(dataRec:List[Cord]):
+    collected_data = []
     for item in dataRec:
         collected_data.append([item.timestamp, item.latitude, item.longitude, item.speed])
     print(collected_data)
