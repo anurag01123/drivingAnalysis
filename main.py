@@ -60,8 +60,10 @@ async def post_todo(dataRec:List[Cord]):
     clf = load_learner("trainedModel.pkl")
     probas, target, preds = clf.get_X_preds(X_test)
     if(preds=='[0.0]'):
+        df = df.iloc[0:0]
         return{"Class":"Safe"}
     else:
+        df = df.iloc[0:0]
         return{"Class":"Unsafe"}
 
 # @app.get("/score")
