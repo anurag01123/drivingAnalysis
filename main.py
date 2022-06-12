@@ -56,16 +56,10 @@ def class_fetch(dataRec:List[Cord]):
         df = pd.concat(newFrame)
     # getting test data
     X_test, y_test = df2Xy(df, sample_col='TripID', sort_by ='time',data_cols=['Latitude','Longitude','speed'] ,steps_in_rows=True)
-#     clf = load_learner("trainedModel.pkl")
-#     probas, target, preds = clf.get_X_preds(X_test)
-    learn2 = load_all(path="/export", dls_fname='dls', model_fname='model', learner_fname='learner', device=None, pickle_module=pickle, verbose=False)
-    dls = learn2.dls
-    valid_dl = dls.valid
-    test_ds = valid_dl.dataset.add_test(X_test,y_test)
-    test_dl = valid_dl.new(test_ds)
-    test_probas, test_targets, test_preds = learn2.get_preds(dl=test_dl,reorder=False, with_decoded=True, save_preds=None, save_targs=None)
-    print("Predicted value is:", test_preds[0].item())
-    if(test_preds[0].item()=='[0.0]' or test_preds[0].item() == 0):
+    clf = load_learner("learner.pkl")
+    probas, target, preds = clf.get_X_preds(X_test, y_test)
+    print("Predicted value is:", preds)
+    if(preds=='[0.0]' or preds== 0):
         df = df.iloc[0:0]
         collected_data = []
         return{"Class":"Safe"}
