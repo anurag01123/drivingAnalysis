@@ -16,9 +16,6 @@ class Cord(BaseModel):
     longitude: str
     speed: Optional[str] = ...
     
-# class JsonList(BaseModel):
-#     data: List[Cord]
-
 origins = ["*"]
 
 app.add_middleware(
@@ -35,7 +32,7 @@ def read_root():
 
     
 @app.post("/getClass")
-async def post_todo(dataRec:List[Cord]):
+def class_fetch(dataRec:List[Cord]):
     collected_data = []
     for item in dataRec:
         collected_data.append([item.timestamp, item.latitude, item.longitude, item.speed])
@@ -69,26 +66,3 @@ async def post_todo(dataRec:List[Cord]):
         df = df.iloc[0:0]
         collected_data = []
         return{"Class":"Unsafe"}
-
-# @app.get("/score")
-# def getScore():
-#     dframe = pd.read_csv('/home/dbx/finalApp/download_bike_speed.csv', header=None)
-#     dframe.columns = ["time","Latitude","Longitude","speed"]
-#     dframe["TripID"] = 'T-0'
-#     dframe["Latitude"] = pd.to_numeric(dframe["Latitude"], errors ='ignore')
-#     dframe["Longitude"] = pd.to_numeric(dframe["Longitude"], errors ='ignore')
-#     dframe["speed"] = pd.to_numeric(dframe["speed"], errors ='ignore')
-#     dframe = dframe.sort_values(by=['time'], ascending=True)
-#     dframe2 = np.zeros((1630-len(dframe), 5))
-#     dframe2 = pd.DataFrame(dframe2, columns=["time","Latitude", "Longitude", "speed", "TripID"])
-#     dframe2["TripID"] = 'T-0'
-#     newFrame = [dframe, dframe2]
-#     dframe = pd.concat(newFrame)
-#     # getting test data
-#     X_test, y_test = df2Xy(dframe, sample_col='TripID', sort_by ='time',data_cols=['Latitude','Longitude','speed'] ,steps_in_rows=True)
-#     clf = load_learner("/home/dbx/finalApp/backend/trainedModel.pkl")
-#     probas, target, preds = clf.get_X_preds(X_test)
-#     if(preds=='[0.0]'):
-#         return{"Class":"Safe"}
-#     else:
-#         return{"Class":"Unsafe"}
